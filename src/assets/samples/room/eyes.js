@@ -25,7 +25,7 @@ const options = [
   ]
 ]
 
-
-let text = 'Ich fokussiere meinen Blick. {WORT} ist in der Farbe ' + new RandomGenerator(options[0]).output + ' ' + new RandomGenerator(options[1]).output + ' worden.';
-
-module.exports = text
+const generateText = function () {
+  this.output = 'Ich fokussiere meinen Blick. {WORT} ist in der Farbe ' + new RandomGenerator(options[0]).output + ' ' + new RandomGenerator(options[1]).output + ' worden.';
+}
+module.exports = generateText

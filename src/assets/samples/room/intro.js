@@ -27,9 +27,10 @@ const options = [
   ]
 ]
 
+const generateText = function () {
+  this.output = 'Ich befinde mich in einem neuen Raum.';
+  this.output += ' Der Raum wirkt ' + new RandomGenerator(options[0]).output + '.'
+  this.output += ' Mir fällt dabei direkt etwas auf: Eine Sache in diesem Raum ' + new RandomGenerator(options[1]).output + '.'
+}
 
-let text = 'Ich befinde mich in einem neuen Raum.';
-text += ' Der Raum wirkt ' + new RandomGenerator(options[0]).output + '.'
-text += ' Mir fällt dabei direkt etwas auf: Eine Sache in diesem Raum ' + new RandomGenerator(options[1]).output + '.'
-
-module.exports = text
+module.exports = generateText

@@ -35,7 +35,7 @@ const options = [
   ]
 ]
 
-
-let text = 'Ich halte meine Nase daran. {WORT} riecht ' + new RandomGenerator(options[0]).output + ' ' + new RandomGenerator(options[1]).output + '.';
-
-module.exports = text
+const generateText = function () {
+  this.output = 'Ich halte meine Nase daran. {WORT} riecht ' + new RandomGenerator(options[0]).output + ' ' + new RandomGenerator(options[1]).output + '.';
+}
+module.exports = generateText

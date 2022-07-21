@@ -28,8 +28,8 @@ const options = [
   ]
 ]
 
-
-let text = new RandomGenerator(options[0]).output + ' ' + new RandomGenerator(options[1]).output + '.';
-text += ' Was kann das nur sein?'
-
-module.exports = text
+const generateText = function () {
+  this.output = new RandomGenerator(options[0]).output + ' ' + new RandomGenerator(options[1]).output + '.';
+  this.output += ' Was kann das nur sein?'
+}
+module.exports = generateText

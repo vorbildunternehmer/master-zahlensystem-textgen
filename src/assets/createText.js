@@ -1,5 +1,32 @@
 'use strict'
 
+const roomText = function (word) {
+
+  this.replaceRoom = function (replace, text) {
+    Object.keys(replace).forEach(function (key) {
+      text = text.split('{' + key + '}').join(replace[key])
+    })
+    return text
+  }
+
+  let tempRoom = []
+    let intro = require('./samples/room/intro')
+    let eyes = require('./samples/room/eyes')
+    let hands = require('./samples/room/hands')
+    let location = require('./samples/room/location')
+    let noise = require('./samples/room/noise')
+
+    tempRoom[0] = this.replaceRoom({ 'WORT': word }, new intro().output)
+    tempRoom[1] = this.replaceRoom({ 'WORT': word }, new location().output)
+    tempRoom[2] = this.replaceRoom({ 'WORT': word }, new hands().output)
+    tempRoom[3] = this.replaceRoom({ 'WORT': word }, require('./samples/room/word'))
+    tempRoom[4] = this.replaceRoom({ 'WORT': word }, new eyes().output)
+    tempRoom[5] = this.replaceRoom({ 'WORT': word }, new noise().output)
+    tempRoom[6] = this.replaceRoom({ 'WORT': word }, require('./samples/room/exit'))
+
+    this.output = tempRoom
+}
+
 const textGenerator = function (number, words) {
 
   this.words = words.split(' ')
@@ -15,15 +42,8 @@ const textGenerator = function (number, words) {
   this.getText = function () {
 
   this.words.forEach(function (word) {
-    let tempRoom = []
-    tempRoom[0] = this.replaceRoom({ 'WORT': word }, require('./samples/room/intro'))
-    tempRoom[1] = this.replaceRoom({ 'WORT': word }, require('./samples/room/location'))
-    tempRoom[2] = this.replaceRoom({ 'WORT': word }, require('./samples/room/hands'))
-    tempRoom[3] = this.replaceRoom({ 'WORT': word }, require('./samples/room/word'))
-    tempRoom[4] = this.replaceRoom({ 'WORT': word }, require('./samples/room/eyes'))
-    tempRoom[5] = this.replaceRoom({ 'WORT': word }, require('./samples/room/noise'))
-    tempRoom[6] = this.replaceRoom({ 'WORT': word }, require('./samples/room/exit'))
-    this.rawText = this.rawText.concat(tempRoom)
+    let roomGeneratedText = new roomText(word)
+    this.rawText = this.rawText.concat(roomGeneratedText.output)
   }.bind(this))
 
 const outro = require('./samples/outro')
@@ -40,13 +60,6 @@ this.rawText.push(solution)
   }.bind(this))
 
   this.text = txt
-  }
-
-  this.replaceRoom = function (replace, text) {
-    Object.keys(replace).forEach(function (key) {
-      text = text.split('{' + key + '}').join(replace[key])
-    })
-    return text
   }
 
   this.getText()
